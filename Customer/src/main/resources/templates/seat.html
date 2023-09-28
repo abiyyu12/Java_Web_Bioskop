@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head th:replace="~{fragments::header}">
+</head>
+<body>
+<div th:replace="~{fragments::navbar}">
+</div>
+<div class="container py-5">
+    <div class="row d-flex justify-content-center">
+        <div
+                class="col-md-9 col-lg-7 col-xl-5 rounded"
+                style="background-color: #fff"
+        >
+            <h5 class="text-center m-4">Choose A Seat To Continue</h5>
+            <p th:if="${orderId}" th:text="${orderId}"></p>
+            <p th:if="${error}" th:text="${error}" class="alert alert-danger"></p>
+            <ul class="showcase">
+                <li>
+                    <div class="seat"></div>
+                    <small>N/A</small>
+                </li>
+                <li>
+                    <div class="seat premium"></div>
+                    <small>Premium</small>
+                </li>
+                <li>
+                    <div class="seat occupied"></div>
+                    <small>Occupied</small>
+                </li>
+            </ul>
+            <form th:action="@{/takeseat}" method="post">
+                <div class="row text-white">
+                    <div class="col col-lg-2" th:each="seat : ${seats}">
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    th:value="${seat.number}"
+                                    id="flexCheckDefault"
+                                    name="selectedSeat"
+                                    th:checked="${seat.is_booking}"
+                                    th:disabled="${seat.is_booking}"
+                            />
+                            <label
+                                    class="form-check-label seat"
+                                    th:classappend="${(seat.number <= premiumSeat and seat.is_booking == false ? 'premium' : '') + (seat.is_booking ? 'occupied' : '')}"
+                                    for="flexCheckDefault"
+                                    th:text="${seat.number}"
+                            >
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <p class="text mt-3">
+                    You must selected <span th:text="${order.quantity}"></span> [[${order.ticketType}]] seats
+                </p>
+                <div class="d-flex justify-content-end mb-3">
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        Take Seat
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments::footer}">
+</div>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

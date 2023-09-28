@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+  <head th:replace="~{fragments::header}">
+  </head>
+  <body>
+    <div th:replace="~{fragments::navbar}">
+    </div>
+    <div class="container" th:each="day : ${days}" style="margin-top: 14px">
+      <div class="title">
+        <p th:text="${day.days}"></p>
+      </div>
+      <div class="my-cards">
+        <div class="row">
+          <div class="col-lg-3 col-sm-3"
+               th:each="sfilm : ${films}" th:if="${sfilm.date == day.days}" style="margin-top: 30px">
+            <a th:href="@{'/desc/'+${sfilm.id}}">
+              <div class="card" style="width: 18rem">
+                <img
+                        th:src="'data:image/jpeg;base64,' + ${sfilm.film.posters}"
+                        class="card-img-top"
+                        style="height: 400px"
+                />
+                <div class="card-body">
+                  <p class="card-text" th:text="${sfilm.film.name}"></p>
+                  <p class="card-text" th:text="${sfilm.film.releaseDate} + ' | ' + ${sfilm.film.genre}"></p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="~{fragments::footer}">
+    </div>
+    <div th:replace="~{fragments::script}"></div>
+  </body>
+</html>

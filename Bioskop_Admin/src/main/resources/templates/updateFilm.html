@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head th:replace = "~{fragments::header}">
+<body>
+<div id="app">
+  <div class="main-wrapper">
+    <div class="navbar-bg"></div>
+    <nav th:replace="~{fragments::navbar}"></nav>
+    <div th:replace="~{fragments::sidebar}"></div>
+    <div class="main-content">
+      <section class="section">
+        <div class="section-header">
+          <div class="section-header-back">
+            <a tH:href="@{/film}" class="btn"><i class="fa fa-arrow-left"></i></a>
+          </div>
+          <h1>Update Film</h1>
+        </div>
+        <div th:if="${errors}" class="alert alert-danger alert-dismissible show fade">
+          <div class="alert-body">
+            <button class="close" data-dismiss="alert">X</button>
+            <b>Errors ! </b>
+            <p th:text="${errors}"></p>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="card">
+            <div class="card-header">
+              <h4>Update Film</h4>
+            </div>
+            <div class="card-body col-md-8">
+              <form th:action="@{/film/update}" enctype="multipart/form-data" method="post" autocomplete="off" th:object="${filmDto}">
+                <input type="hidden" th:field="*{id}" name="id">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input th:field="*{name}" type="text" name="name" class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''" autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{name}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Genre</label>
+                  <input th:field="*{genre}" type="text" name="genre" class="form-control" th:classappend="${#fields.hasErrors('genre')} ? 'is-invalid' : ''" placeholder="Genre1 | Genre2 | Genre3" autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{genre}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea th:field="*{description}" name="description" class="form-control" th:classappend="${#fields.hasErrors('description')} ? 'is-invalid' : ''" autofocus>
+                  </textarea>
+                  <div class="invalid-feedback"  th:errors ="*{description}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Duration</label>
+                  <input th:field="*{duration}" type="number" name="name" class="form-control" th:classappend="${#fields.hasErrors('duration')} ? 'is-invalid' : ''" autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{duration}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Rating</label>
+                  <input th:field="*{rating}" type="number" name="name" class="form-control" th:classappend="${#fields.hasErrors('rating')} ? 'is-invalid' : ''" autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{rating}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Release Date</label>
+                  <input type="date" name="releaseDate" th:field="*{releaseDate}" th:classappend="${#fields.hasErrors('releaseDate')} ? 'is-invalid' : ''" class="form-control" autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{releaseDate}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Studio Name</label>
+                  <select class="form-control" th:field="*{studio.id}" name="studio">
+                    <option th:each="std : ${studios}"
+                            th:text="${std.name}"
+                            th:value="${std.id}">
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Posters</label>
+                  <center>
+                    <img class = "my-product-image" style="width: 250px;" alt=""
+                         th:src="'data:image/jpeg;base64,' + *{posters}">
+                  </center>
+                  <input th:if="${posterErrors}" type="file" name="postersImage" class="form-control is-invalid" autofocus>
+                  <input th:if="${!posterErrors}" type="file" name="postersImage" class="form-control" autofocus>
+                  <div class="invalid-feedback">
+                    Poster Cannot Null
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Heroes</label>
+                  <center>
+                  <img class = "my-product-image" style="width: 250px;" alt=""
+                       th:src="'data:image/jpeg;base64,' + *{hero}">
+                  </center>
+                  <input th:if="${heroErrors}" type="file" name="heroImages" class="form-control is-invalid" autofocus>
+                  <input th:if="${!heroErrors}" type="file" name="heroImages" class="form-control" autofocus>
+                  <div class="invalid-feedback">
+                    Heroes Cannot Null
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Premium Price</label>
+                  <input th:field="*{premiumPrice}" type="number" name="premiumPrice" class="form-control" th:classappend="${#fields.hasErrors('premiumPrice')} ? 'is-invalid' : ''" autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{premiumPrice}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Regular Price</label>
+                  <input th:field="*{regularPrice}" type="number" name="regularPrice" class="form-control" th:classappend="${#fields.hasErrors('regularPrice')} ? 'is-invalid' : ''"  autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{regularPrice}">
+                  </div>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"> Save</i></button>
+                  <button type="reset" class="btn btn-secondary"> Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer th:replace="~{fragments::footer}"></footer>
+  </div>
+</div>
+<div th:replace="~{fragments::js}">
+</div>
+</body>
+</html>

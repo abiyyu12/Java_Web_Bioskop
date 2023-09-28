@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head th:replace = "~{fragments::header}">
+<body>
+<div id="app">
+  <div class="main-wrapper">
+    <div class="navbar-bg"></div>
+    <nav th:replace="~{fragments::navbar}"></nav>
+    <div th:replace="~{fragments::sidebar}"></div>
+    <div class="main-content">
+      <section class="section">
+        <div class="section-header">
+          <div class="section-header-back">
+            <a tH:href="@{/schedule}" class="btn"><i class="fa fa-arrow-left"></i></a>
+          </div>
+          <h1>Add Schedule</h1>
+        </div>
+        <div th:if="${errors}" class="alert alert-danger alert-dismissible show fade">
+          <div class="alert-body">
+            <button class="close" data-dismiss="alert">X</button>
+            <b>Errors ! </b>
+            <p th:text="${errors}"></p>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="card">
+            <div class="card-header">
+              <h4>Add New Schedule</h4>
+            </div>
+            <div class="card-body col-md-8">
+              <form th:action="@{/schedule/add}" enctype="multipart/form-data" method="post" autocomplete="off" th:object="${scheduleDto}">
+                <div class="form-group">
+                  <label>Date</label>
+                  <input th:field="*{date}" type="date" name="date" class="form-control" th:classappend="${#fields.hasErrors('date')} ? 'is-invalid' : ''" autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{date}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Opening Time</label>
+                  <input th:field="*{openingTime}" type="time" name="openingTime" class="form-control" th:classappend="${#fields.hasErrors('openingTime')} ? 'is-invalid' : ''"autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{openingTime}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Closing Time</label>
+                  <input th:field="*{closingTime}" type="time" name="closingTime" class="form-control" th:classappend="${#fields.hasErrors('closingTime')} ? 'is-invalid' : ''"autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{closingTime}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Regular Ticket</label>
+                  <input th:field="*{regularTicket}" type="number" name="regularTicket" class="form-control" th:classappend="${#fields.hasErrors('regularTicket')} ? 'is-invalid' : ''" autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{regularTicket}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Premium Ticket</label>
+                  <input th:field="*{premiumTicket}" type="number" name="premiumTicket" class="form-control" th:classappend="${#fields.hasErrors('premiumTicket')} ? 'is-invalid' : ''" autofocus>
+                  <div class="invalid-feedback"  th:errors ="*{premiumTicket}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Select Film</label>
+                  <select class="form-control" th:field="*{film.id}" name="film">
+                    <option th:each="flm : ${films}"
+                            th:text="${flm.name}"
+                            th:value="${flm.id}">
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"> Save</i></button>
+                  <button type="reset" class="btn btn-secondary"> Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer th:replace="~{fragments::footer}"></footer>
+  </div>
+</div>
+<div th:replace="~{fragments::js}">
+</div>
+</body>
+</html>

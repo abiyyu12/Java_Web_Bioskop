@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head th:replace="~{fragments::header}">
+</head>
+<body>
+<div th:replace="~{fragments::navbar}">
+</div>
+<section style="background-color: #000">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-9 col-lg-7 col-xl-5">
+                <div class="card">
+                    <img
+                            th:src="'data:image/jpeg;base64,' + ${scheduleFilm.film.posters}"
+                            class="card-img-top"
+                            alt="Poster Image"
+                    />
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between mb-3">
+                            <p class="text-muted mb-0">Premium Chairs</p>
+                            <p class="mb-0" th:text="'$' + ${scheduleFilm.film.premiumPrice}"></p>
+                        </div>
+                        <div class="card-title d-flex justify-content-between">
+                            <p class="text-muted mb-0">Regular Chairs</p>
+                            <p class="mb-0" th:text="'$' + ${scheduleFilm.film.regularPrice}"></p>
+                        </div>
+                    </div>
+                    <div class="rounded-bottom" style="background-color: #fff">
+                        <div class="card-body">
+                            <p class="mb-2">Orders</p>
+                            <div class="row mb-2">
+                                <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}">
+                                </div>
+                                <form th:action="@{/order}" method="post">
+                                    <input type="hidden" name="scheduleId" th:value="${scheduleFilm.id}"/>
+                                    <div class="form-floating mb-3 col-12">
+                                        <input
+                                                type="number"
+                                                name="totalTicket"
+                                                class="form-control"
+                                                id="floatingInput"
+                                                placeholder="name@example.com"
+                                        />
+                                        <label for="floatingInput">Total Tickets</label>
+                                    </div>
+                                    <p class="mb-2">Category Tickets</p>
+                                    <div class="col-12">
+                                        <div class="form-check form-check-inline">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="ticketType"
+                                                    id="inlineRadio2"
+                                                    value="1"
+                                                    checked
+                                            />
+                                            <label class="form-check-label" for="inlineRadio2"
+                                            >Regular Tickets</label
+                                            >
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="ticketType"
+                                                    id="inlineRadio1"
+                                                    value="2"
+                                            />
+                                            <label class="form-check-label" for="inlineRadio1"
+                                            >Premium Tickets</label
+                                            >
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-block text-white" type="submit">
+                                        Order now
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="~{fragments::footer}">
+</div>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

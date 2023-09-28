@@ -1,0 +1,124 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #000;
+  font-size: 14px;
+}
+
+.navbar-brand span {
+  letter-spacing: 3px;
+  font-size: 15px;
+}
+
+.navbar-nav .btn-login {
+  background-color: rgb(219, 95, 0);
+  color: white;
+  border-color: rgb(219, 95, 0);
+}
+
+.container .hero-section img {
+  height: 700px;
+  width: 100%;
+}
+
+.container .hero-section {
+  padding: 20px;
+}
+
+.container .content-hero .sinopisis {
+  color: #fff;
+  font-size: 12px;
+  text-transform: capitalize;
+  text-align: justify;
+  text-indent: 50px;
+  font-weight: 200;
+}
+
+.container .hero-section h4 {
+  font-size: 30px;
+  color: #fff;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.container .content-hero table tr td {
+  color: #fff;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-weight: 200;
+}
+
+.container .content-hero .my-button a {
+  text-decoration: none;
+  background-color: rgb(219, 95, 0);
+  color: white;
+  border-color: rgb(219, 95, 0);
+  text-align: center;
+  font-size: 16px;
+}
+.my-footer {
+  background-color: #000;
+  margin-top: 50px;
+  height: auto;
+  position: relative;
+}
+
+.my-footer .f-content-1 {
+  margin-top: 25px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.my-footer .f-content-1 span {
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+.my-footer .f-content-1 h6 {
+  font-weight: 400;
+  font-size: 17px;
+}
+
+.my-footer .f-content-2 {
+  margin-top: -45px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.my-footer .f-content-2 ul,
+.my-footer .f-content-3 ul {
+  list-style: none;
+  display: flex;
+  font-size: 16px;
+}
+
+.my-footer .f-content-2 ul li a,
+.my-footer .f-content-3 ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.my-footer .f-content-2 ul li,
+.my-footer .f-content-3 ul li {
+  margin-right: 20px;
+}
+
+.my-footer .f-content-3 {
+  margin-top: -30px;
+  display: flex;
+  justify-content: right;
+}
+
+.my-footer .f-content-4 {
+  margin-top: 45px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.my-footer .f-content-4 p {
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head th:replace = "~{fragments::header}">
+<body>
+<div id="app">
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <nav th:replace="~{fragments::navbar}"></nav>
+        <div th:replace="~{fragments::sidebar}"></div>
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-primary">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Admin</h4>
+                                    </div>
+                                    <div th:if="${cAdmin}" th:text="${cAdmin}" class="card-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-danger">
+                                    <i class="fas fa-film"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Films</h4>
+                                    </div>
+                                    <div th:if="${cFilm}" th:text="${cFilm}" class="card-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-warning">
+                                    <i class="fas fa-caret-square-right"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Studio</h4>
+                                    </div>
+                                    <div th:if="${cStudio}" th:text="${cStudio}" class="card-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-success">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Customers</h4>
+                                    </div>
+                                    <div th:if="${cCustomer}" th:text="${cCustomer}" class="card-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-primary">
+                                    <i class="fas fa-ticket-alt"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Orders</h4>
+                                    </div>
+                                    <div th:if="${cOrder}" th:text="${cOrder}" class="card-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-danger">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Schedule</h4>
+                                    </div>
+                                    <div th:if="${cSchedule}" th:text="${cSchedule}" class="card-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Transaction 5 Days Before</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="ordersChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer th:replace="~{fragments::footer}"></footer>
+    </div>
+</div>
+<div th:replace="~{fragments::js}">
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+      var isLogin = [[${isLogin}]];
+      if(isLogin == true){
+        swal("Welcome Admin", "Login Successfully!", "success");
+      }
+</script>
+<script th:inline="javascript">
+    var ctx = document.getElementById("ordersChart").getContext("2d");
+      var myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: [[${orderLabel}]],
+        datasets: [
+          {
+            label: "Statistics",
+            data: [[${orderValue}]],
+            borderWidth: 2,
+            backgroundColor: "#6777ef",
+            borderColor: "#6777ef",
+            borderWidth: 2.5,
+            pointBackgroundColor: "#ffffff",
+            pointRadius: 4,
+          },
+        ],
+      },
+      options: {
+        legend: {
+          display: false,
+        },
+        scales: {
+          yAxes: [
+            {
+              gridLines: {
+                drawBorder: false,
+                color: "#f2f2f2",
+              },
+              ticks: {
+                beginAtZero: true,
+                stepSize: 150,
+              },
+            },
+          ],
+          xAxes: [
+            {
+              ticks: {
+                display: false,
+              },
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+        },
+      },
+    });
+</script>
+</body>
+</html>

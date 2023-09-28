@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "https://www.thymeleaf.org/">
+<head th:replace="~{fragments::header}">
+</head>
+<body>
+  <div th:replace="~{fragments::navbar}">
+  </div>
+    <div class="container mb-4">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" th:each="heros,status : ${heroes}">
+          <div class="carousel-item" th:classappend="${status.count} == ${rand} ? 'active' : ''">
+            <img th:src="'data:image/jpeg;base64,' + ${heros.hero}" class="d-block w-100" alt="..." />
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="container" th:each="rate : ${rating}" style="margin-top: 14px">
+      <div class="title">
+        <p th:text="'Rate : ' + ${rate.rating} + ' (' + ${rate.size} + ')' "></p>
+      </div>
+      <div class="my-cards">
+        <div class="row">
+          <div class="col-lg-3 col-sm-3" th:each="film : ${films}" th:if="${rate.rating == film.rating}" style="margin-top: 30px">
+            <a href="#">
+              <div class="card" style="width: 18rem">
+                <img
+                  th:src="'data:image/jpeg;base64,' + ${film.posters}"
+                  class="card-img-top"
+                  style="height: 400px"
+                />
+                <div class="card-body">
+                  <p class="card-text" th:text="${film.name}"></p>
+                  <p class="card-text" th:text="${film.releaseDate} + ' | ' + ${film.genre}"></p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="~{fragments::footer}">
+    </div>
+    <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"
+    ></script>
+    </body>
+</html>
